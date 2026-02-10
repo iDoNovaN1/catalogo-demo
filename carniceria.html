@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carnicería Premium - Los Mejores Cortes</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Crimson+Text:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-burgundy: #8B1E3F;
+            --color-dark-burgundy: #5C1426;
+            --color-cream: #FFF8F0;
+            --color-tan: #E8DCC4;
+            --color-gold: #D4AF37;
+            --color-charcoal: #2C2C2C;
+            --color-light-gray: #F5F5F5;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Crimson Text', serif;
+            background-color: var(--color-cream);
+            color: var(--color-charcoal);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--color-burgundy) 0%, var(--color-dark-burgundy) 100%);
+            color: var(--color-cream);
+            padding: 3rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(139, 30, 63, 0.3);
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(255, 248, 240, 0.03) 10px,
+                rgba(255, 248, 240, 0.03) 20px
+            );
+            animation: slidePattern 20s linear infinite;
+        }
+
+        @keyframes slidePattern {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(40px, 40px); }
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 900;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .tagline {
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            font-weight: 600;
+            color: var(--color-tan);
+            position: relative;
+            z-index: 1;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        /* Navigation */
+        nav {
+            background-color: var(--color-charcoal);
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: var(--color-cream);
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--color-gold);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        nav a:hover {
+            color: var(--color-gold);
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .intro {
+            text-align: center;
+            margin-bottom: 4rem;
+            animation: fadeIn 1s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .intro h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: var(--color-burgundy);
+            margin-bottom: 1rem;
+        }
+
+        .intro p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            color: var(--color-charcoal);
+            line-height: 1.8;
+        }
+
+        /* Meat Cuts Grid */
+        .cuts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .cut-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+            position: relative;
+            animation: slideUp 0.6s ease-out backwards;
+        }
+
+        .cut-card:nth-child(1) { animation-delay: 0.1s; }
+        .cut-card:nth-child(2) { animation-delay: 0.2s; }
+        .cut-card:nth-child(3) { animation-delay: 0.3s; }
+        .cut-card:nth-child(4) { animation-delay: 0.4s; }
+        .cut-card:nth-child(5) { animation-delay: 0.5s; }
+        .cut-card:nth-child(6) { animation-delay: 0.6s; }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .cut-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(139, 30, 63, 0.2);
+        }
+
+        .cut-image {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .cut-card:hover .cut-image {
+            transform: scale(1.05);
+        }
+
+        .cut-content {
+            padding: 1.5rem;
+        }
+
+        .cut-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--color-burgundy), var(--color-dark-burgundy));
+            color: var(--color-cream);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+        }
+
+        .cut-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--color-burgundy);
+            margin-bottom: 0.5rem;
+        }
+
+        .cut-origin {
+            font-size: 1rem;
+            color: var(--color-gold);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+
+        .cut-description {
+            font-size: 1.05rem;
+            color: #555;
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+
+        .cut-features {
+            list-style: none;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--color-tan);
+        }
+
+        .cut-features li {
+            padding: 0.4rem 0;
+            font-size: 0.95rem;
+            color: var(--color-charcoal);
+        }
+
+        .cut-features li::before {
+            content: '✓ ';
+            color: var(--color-burgundy);
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        /* Diagram Section */
+        .diagram-section {
+            background: white;
+            padding: 4rem 2rem;
+            margin: 4rem 0;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .diagram-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            color: var(--color-burgundy);
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .diagram-container {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .diagram-image {
+            width: 100%;
+            max-width: 700px;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            margin-bottom: 1.5rem;
+        }
+
+        .diagram-caption {
+            font-size: 1.1rem;
+            color: #666;
+            font-style: italic;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--color-charcoal);
+            color: var(--color-cream);
+            padding: 3rem 2rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--color-gold);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: var(--color-tan);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--color-gold);
+        }
+
+        .copyright {
+            border-top: 1px solid rgba(255, 248, 240, 0.2);
+            padding-top: 2rem;
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            color: var(--color-tan);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav ul {
+                gap: 1rem;
+            }
+
+            nav a {
+                font-size: 0.95rem;
+            }
+
+            .cuts-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .container {
+                padding: 2rem 1rem;
+            }
+        }
+
+        /* Scroll animations */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .scroll-reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🥩 Carnicería Premium</h1>
+        <p class="tagline">Calidad Superior en Cada Corte</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#cortes">Nuestros Cortes</a></li>
+            <li><a href="#diagrama">Guía de Cortes</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <section class="intro scroll-reveal" id="inicio">
+            <h2>Tradición y Calidad desde 1985</h2>
+            <p>En nuestra carnicería ofrecemos los mejores cortes de carne, seleccionados cuidadosamente para garantizar frescura, sabor y terneza. Conoce nuestros productos premium y descubre el corte perfecto para cada ocasión.</p>
+        </section>
+
+        <section id="cortes">
+            <div class="cuts-grid">
+                <!-- Ribeye -->
+                <div class="cut-card">
+                    <img src="https://images.unsplash.com/photo-1603048588665-791ca8aea617?w=600&q=80" alt="Ribeye" class="cut-image">
+                    <div class="cut-content">
+                        <span class="cut-badge">Premium</span>
+                        <h3>Ribeye</h3>
+                        <p class="cut-origin">Parte: Costilla (6-12)</p>
+                        <p class="cut-description">Uno de los cortes más jugosos y sabrosos, con abundante marmoleo. Ideal para asados y parrillas. Su grasa entreverada le da un sabor intenso y textura suave.</p>
+                        <ul class="cut-features">
+                            <li>Alto marmoleo</li>
+                            <li>Muy jugoso</li>
+                            <li>Ideal para parrilla</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- New York Strip -->
+                <div class="cut-card">
+                    <img src="https://images.unsplash.com/photo-1588168333986-5078d3ae3976?w=600&q=80" alt="New York Strip" class="cut-image">
+                    <div class="cut-content">
+                        <span class="cut-badge">Premium</span>
+                        <h3>New York Strip</h3>
+                        <p class="cut-origin">Parte: Lomo Corto</p>
+                        <p class="cut-description">Corte tierno y jugoso con un equilibrio perfecto entre grasa y carne magra. Sabor robusto y textura firme. Excelente para sellar a la plancha.</p>
+                        <ul class="cut-features">
+                            <li>Textura firme</li>
+                            <li>Sabor intenso</li>
+                            <li>Grasa moderada</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Filete (Tenderloin) -->
+                <div class="cut-card">
+                    <img src="https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=600&q=80" alt="Filete" class="cut-image">
+                    <div class="cut-content">
+                        <span class="cut-badge">Especial</span>
+                        <h3>Filete / Tenderloin</h3>
+                        <p class="cut-origin">Parte: Lomo Bajo</p>
+                        <p class="cut-description">El corte más tierno de la res. Textura suave como mantequilla, bajo en grasa. Perfecto para ocasiones especiales y preparaciones gourmet.</p>
+                        <ul class="cut-features">
+                            <li>Máxima terneza</li>
+                            <li>Bajo en grasa</li>
+                            <li>Sabor delicado</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- T-Bone -->
+                <div class="cut-card">
+                    <img src="https://images.unsplash.com/photo-1558030006-450675393462?w=600&q=80" alt="T-Bone" class="cut-image">
+                    <div class="cut-content">
+                        <span class="cut-badge">Clásico</span>
+                        <h3>T-Bone</h3>
+                        <p class="cut-origin">Parte: Lomo (entre costilla y cadera)</p>
+                        <p class="cut-description">Corte con hueso en forma de T que incluye tanto filete como New York Strip. Lo mejor de dos mundos en un solo corte. Ideal para parrilladas.</p>
+                        <ul class="cut-features">
+                            <li>Doble corte</li>
+                            <li>Con hueso</li>
+                            <li>Muy sabroso</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Sirloin -->
+                <div class="cut-card">
+                    <img src="https://images.unsplash.com/photo-1602470520998-f4a52199a3d6?w=600&q=80" alt="Sirloin" class="cut-image">
+                    <div class="cut-content">
+                        <span class="cut-badge">Popular</span>
+                        <h3>Sirloin</h3>
+                        <p class="cut-origin">Parte: Cadera Superior</p>
+                        <p class="cut-description">Corte versátil y económico con buen sabor. Menos grasa que el ribeye pero muy sabroso. Perfecto para bistecs, fajitas y estofados.</p>
+                        <ul class="cut-features">
+                            <li>Versátil</li>
+                            <li>Buen precio</li>
+                            <li>Sabor balanceado</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Brisket -->
+                <div class="cut-card">
+                    <img src="https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?w=600&q=80" alt="Brisket" class="cut-image">
+                    <div class="cut-content">
+                        <span class="cut-badge">BBQ</span>
+                        <h3>Brisket / Pecho</h3>
+                        <p class="cut-origin">Parte: Pecho Delantero</p>
+                        <p class="cut-description">Corte ideal para cocción lenta. Rico en colágeno que se convierte en gelatina, resultando en carne tierna y jugosa. Estrella del BBQ tradicional.</p>
+                        <ul class="cut-features">
+                            <li>Cocción lenta</li>
+                            <li>Muy jugoso</li>
+                            <li>Ideal para ahumar</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="diagram-section scroll-reveal" id="diagrama">
+            <h2>Guía Visual de Cortes de Res</h2>
+            <div class="diagram-container">
+                <img src="https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?w=800&q=80" alt="Diagrama de cortes de res" class="diagram-image">
+                <p class="diagram-caption">Conoce de dónde proviene cada corte y sus características únicas. Nuestro personal experto te puede asesorar para elegir el corte perfecto según tu preparación.</p>
+            </div>
+        </section>
+    </div>
+
+    <footer id="contacto">
+        <div class="footer-content">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>Ubicación</h3>
+                    <p>Calle Principal #123</p>
+                    <p>Colonia Centro</p>
+                    <p>Ciudad de México</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Horario</h3>
+                    <p>Lunes - Viernes: 8:00 AM - 8:00 PM</p>
+                    <p>Sábados: 8:00 AM - 6:00 PM</p>
+                    <p>Domingos: 9:00 AM - 3:00 PM</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Contacto</h3>
+                    <p>Teléfono: (55) 1234-5678</p>
+                    <p>WhatsApp: (55) 8765-4321</p>
+                    <a href="mailto:contacto@carniceriapremium.com">contacto@carniceriapremium.com</a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2024 Carnicería Premium. Todos los derechos reservados. | Calidad garantizada desde 1985</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll reveal animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.scroll-reveal').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Smooth scroll for navigation
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                if (targetSection) {
+                    targetSection.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
