@@ -1314,14 +1314,53 @@
   });
 
   // Form submit (demo)
-  document.querySelector('.form-submit').addEventListener('click', function() {
-    this.textContent = '✓ Mensaje enviado — te contactamos pronto!';
-    this.style.background = '#2a7a4a';
-    setTimeout(() => {
-      this.textContent = 'Enviar mensaje →';
-      this.style.background = '';
-    }, 3000);
-  });
+ document.querySelector('.form-submit').addEventListener('click', function () {
+  const whatsappNumber = '5215544117694'; // 👈 pon tu número aquí
+
+  const nombre   = document.querySelector('input[placeholder="Tu nombre completo"]').value.trim();
+  const telefono = document.querySelector('input[placeholder="(55) 0000-0000"]').value.trim();
+  const correo   = document.querySelector('input[placeholder="tu@correo.com"]').value.trim();
+  const tipo     = document.querySelector('select').value;
+  const mensaje  = document.querySelector('textarea').value.trim();
+
+  if (!nombre || !telefono) {
+    alert('Por favor ingresa al menos tu nombre y teléfono.');
+    return;
+  }
+
+  const texto = `👋 *Hola! Me contacto desde tu portafolio web*
+
+👤 *Nombre:* ${nombre}
+📱 *Teléfono:* ${telefono || 'No proporcionado'}
+✉️ *Correo:* ${correo || 'No proporcionado'}
+🌐 *Tipo de proyecto:* ${tipo || 'No especificado'}
+
+💬 *Mensaje:*
+${mensaje || 'Sin mensaje adicional'}`;
+
+  const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(texto)}`;
+  window.open(url, '_blank');
+
+  this.textContent = '✓ Abriendo WhatsApp...';
+  this.style.background = '#25a244';
+  setTimeout(() => {
+    this.textContent = 'Enviar mensaje →';
+    this.style.background = '';
+  }, 3000);
+});
+```
+
+---
+
+Eso es todo. Con esos dos cambios, cuando alguien llene el formulario y presione el botón, se abrirá WhatsApp con un mensaje así:
+```
+👋 Hola! Me contacto desde tu portafolio web
+
+👤 Nombre: Juan Pérez
+📱 Teléfono: 55 1234 5678
+✉️ Correo: juan@gmail.com
+🌐 Tipo de proyecto: Catálogo digital
+💬 Mensaje: Necesito una página para mi negocio...
 </script>
 
 </body>
