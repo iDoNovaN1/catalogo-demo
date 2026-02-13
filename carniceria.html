@@ -89,25 +89,64 @@
         /* Navigation */
         nav {
             background-color: var(--color-charcoal);
-            padding: 1rem;
+            padding: 0 2rem;
             position: sticky;
             top: 0;
             z-index: 100;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
         }
 
-        nav ul {
+        .nav-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 70px;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            text-decoration: none;
+        }
+
+        .nav-logo-icon {
+            font-size: 1.6rem;
+            line-height: 1;
+        }
+
+        .nav-logo-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--color-cream);
+            letter-spacing: 1px;
+            line-height: 1.1;
+        }
+
+        .nav-logo-text span {
+            display: block;
+            font-size: 0.65rem;
+            font-family: 'Crimson Text', serif;
+            color: var(--color-gold);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .nav-links {
             list-style: none;
             display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
+            align-items: center;
             gap: 2rem;
         }
 
-        nav a {
+        .nav-links a {
             color: var(--color-cream);
             text-decoration: none;
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -115,7 +154,7 @@
             position: relative;
         }
 
-        nav a::after {
+        .nav-links a::after {
             content: '';
             position: absolute;
             bottom: -5px;
@@ -126,12 +165,103 @@
             transition: width 0.3s ease;
         }
 
-        nav a:hover::after {
-            width: 100%;
+        .nav-links a:hover::after { width: 100%; }
+        .nav-links a:hover { color: var(--color-gold); }
+
+        /* CTA Button */
+        .nav-cta {
+            background: linear-gradient(135deg, var(--color-burgundy), var(--color-dark-burgundy));
+            color: var(--color-cream) !important;
+            padding: 0.55rem 1.4rem;
+            border-radius: 30px;
+            font-size: 0.95rem !important;
+            letter-spacing: 1px;
+            border: 2px solid transparent;
+            transition: all 0.3s ease !important;
+            white-space: nowrap;
         }
 
-        nav a:hover {
+        .nav-cta::after { display: none !important; }
+
+        .nav-cta:hover {
+            background: transparent !important;
+            border-color: var(--color-gold) !important;
+            color: var(--color-gold) !important;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(212, 175, 55, 0.25);
+        }
+
+        /* Hamburger */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            gap: 5px;
+            cursor: pointer;
+            padding: 6px;
+            background: none;
+            border: none;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 26px;
+            height: 2px;
+            background-color: var(--color-cream);
+            border-radius: 2px;
+            transition: all 0.35s ease;
+            transform-origin: center;
+        }
+
+        .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+        .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+        /* Mobile menu */
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            background-color: #1e1e1e;
+            padding: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.3s ease;
+        }
+
+        .mobile-menu.open {
+            max-height: 400px;
+            padding: 1rem 0;
+        }
+
+        .mobile-menu a {
+            color: var(--color-cream);
+            text-decoration: none;
+            padding: 0.85rem 2rem;
+            font-size: 1.05rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 1px solid rgba(255,248,240,0.07);
+            transition: background 0.2s ease, color 0.2s ease;
+        }
+
+        .mobile-menu a:hover {
+            background-color: rgba(255,248,240,0.05);
             color: var(--color-gold);
+        }
+
+        .mobile-menu .mobile-cta {
+            margin: 1rem 2rem 0.5rem;
+            text-align: center;
+            background: linear-gradient(135deg, var(--color-burgundy), var(--color-dark-burgundy));
+            border-radius: 30px;
+            padding: 0.75rem 1.5rem !important;
+            border-bottom: none !important;
+        }
+
+        .mobile-menu .mobile-cta:hover {
+            background: var(--color-dark-burgundy) !important;
+            color: var(--color-gold) !important;
         }
 
         /* Main Content */
@@ -366,15 +496,21 @@
         }
 
         /* Responsive */
+        @media (max-width: 900px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .mobile-menu {
+                display: flex;
+            }
+        }
+
         @media (max-width: 768px) {
-            nav ul {
-                gap: 1rem;
-            }
-
-            nav a {
-                font-size: 0.95rem;
-            }
-
             .cuts-grid {
                 grid-template-columns: 1fr;
                 gap: 2rem;
@@ -405,12 +541,41 @@
     </header>
 
     <nav>
-        <ul>
-            <li><a href="#inicio">Inicio</a></li>
-            <li><a href="#cortes">Nuestros Cortes</a></li>
-            <li><a href="#diagrama">Guía de Cortes</a></li>
-            <li><a href="#contacto">Contacto</a></li>
-        </ul>
+        <div class="nav-inner">
+            <!-- Logo -->
+            <a href="#inicio" class="nav-logo">
+                <span class="nav-logo-icon">🥩</span>
+                <div class="nav-logo-text">
+                    Carnicería Premium
+                    <span>Calidad desde 1985</span>
+                </div>
+            </a>
+
+            <!-- Desktop Links -->
+            <ul class="nav-links">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#cortes">Nuestros Cortes</a></li>
+                <li><a href="#diagrama">Guía de Cortes</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+                <li><a href="#contacto" class="nav-cta">📞 Hacer Pedido</a></li>
+            </ul>
+
+            <!-- Hamburger (mobile) -->
+            <button class="hamburger" id="hamburger" aria-label="Abrir menú">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="#inicio">Inicio</a>
+            <a href="#cortes">Nuestros Cortes</a>
+            <a href="#diagrama">Guía de Cortes</a>
+            <a href="#contacto">Contacto</a>
+            <a href="#contacto" class="mobile-cta">📞 Hacer Pedido</a>
+        </div>
     </nav>
 
     <div class="container">
@@ -547,7 +712,7 @@
                     <h3>Contacto</h3>
                     <p>Teléfono: (55) 1234-5678</p>
                     <p>WhatsApp: (55) 8765-4321</p>
-                    <a href="mailto:contacto@carniceriapremium.com">contacto@carniceriapremium.com</a>
+                    <a href="/cdn-cgi/l/email-protection#2a4945445e4b495e456a494b584443494f58434b5a584f47435f4704494547"><span class="__cf_email__" data-cfemail="d0b3bfbea4b1b3a4bf90b3b1a2beb9b3b5a2b9b1a0a2b5bdb9a5bdfeb3bfbd">[email&#160;protected]</span></a>
                 </div>
             </div>
             <div class="copyright">
@@ -557,6 +722,23 @@
     </footer>
 
     <script>
+        // Hamburger menu toggle
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('open');
+            mobileMenu.classList.toggle('open');
+        });
+
+        // Close mobile menu on link click
+        document.querySelectorAll('.mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('open');
+                mobileMenu.classList.remove('open');
+            });
+        });
+
         // Scroll reveal animation
         const observerOptions = {
             threshold: 0.1,
@@ -575,8 +757,8 @@
             observer.observe(el);
         });
 
-        // Smooth scroll for navigation
-        document.querySelectorAll('nav a').forEach(anchor => {
+        // Smooth scroll for all nav links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
                 const targetId = this.getAttribute('href');
