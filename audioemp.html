@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grupo SV | Música, Audio y Entretenimiento</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #FFD700;
+            --secondary: #FF6B35;
+            --accent: #00D9FF;
+            --dark: #0a0a0a;
+            --dark-card: #1a1a1a;
+            --text-light: #e0e0e0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--dark);
+            color: var(--text-light);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Background Animation */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .wave {
+            position: absolute;
+            width: 200%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                rgba(255, 215, 0, 0.03) 25%, 
+                rgba(255, 107, 53, 0.03) 50%, 
+                rgba(0, 217, 255, 0.03) 75%, 
+                transparent 100%);
+            animation: wave 15s linear infinite;
+        }
+
+        .wave:nth-child(2) {
+            animation-delay: -5s;
+            animation-duration: 20s;
+        }
+
+        .wave:nth-child(3) {
+            animation-delay: -10s;
+            animation-duration: 25s;
+        }
+
+        @keyframes wave {
+            0% { transform: translateX(-50%); }
+            100% { transform: translateX(0%); }
+        }
+
+        /* Floating particles */
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 50%;
+            animation: float 20s infinite;
+            opacity: 0.3;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0); }
+            25% { transform: translateY(-100px) translateX(50px); }
+            50% { transform: translateY(-200px) translateX(-50px); }
+            75% { transform: translateY(-100px) translateX(100px); }
+        }
+
+        /* Main Container */
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            border-bottom: 2px solid rgba(255, 215, 0, 0.2);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 3px;
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.5)); }
+            50% { filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.8)); }
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--dark-card);
+            border: 2px solid var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: var(--primary);
+            transition: all 0.5s ease;
+            transform: translate(-50%, -50%);
+        }
+
+        .social-btn:hover::before {
+            width: 100%;
+            height: 100%;
+        }
+
+        .social-btn:hover {
+            color: var(--dark);
+            border-color: var(--secondary);
+            transform: translateY(-5px);
+        }
+
+        .social-btn span {
+            position: relative;
+            z-index: 1;
+            font-size: 1.2rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 100px 0;
+            text-align: center;
+            animation: fadeInUp 1s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 5rem;
+            line-height: 1;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 1s ease 0.2s backwards;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 40px;
+            color: var(--text-light);
+            animation: fadeInUp 1s ease 0.4s backwards;
+        }
+
+        /* Services Grid */
+        .services {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3.5rem;
+            text-align: center;
+            margin-bottom: 60px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .service-card {
+            background: var(--dark-card);
+            padding: 40px 30px;
+            border-radius: 20px;
+            border: 2px solid transparent;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 0.6s ease backwards;
+        }
+
+        .service-card:nth-child(1) { animation-delay: 0.1s; }
+        .service-card:nth-child(2) { animation-delay: 0.2s; }
+        .service-card:nth-child(3) { animation-delay: 0.3s; }
+        .service-card:nth-child(4) { animation-delay: 0.4s; }
+        .service-card:nth-child(5) { animation-delay: 0.5s; }
+        .service-card:nth-child(6) { animation-delay: 0.6s; }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
+            border-radius: 20px;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: -1;
+        }
+
+        .service-card:hover::before {
+            opacity: 1;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(255, 215, 0, 0.3);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .service-card h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .service-card p {
+            color: var(--text-light);
+            font-size: 1rem;
+        }
+
+        /* Pricing Section */
+        .pricing {
+            padding: 80px 0;
+            background: linear-gradient(180deg, transparent, rgba(255, 215, 0, 0.05), transparent);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .price-card {
+            background: var(--dark-card);
+            padding: 40px 30px;
+            border-radius: 20px;
+            text-align: center;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .price-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .price-card:hover::after {
+            left: 100%;
+        }
+
+        .price-card:hover {
+            transform: scale(1.05);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(255, 215, 0, 0.2);
+        }
+
+        .price-card h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .price {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3rem;
+            color: var(--secondary);
+            margin-bottom: 20px;
+        }
+
+        .price-features {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+
+        .price-features li {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.1);
+        }
+
+        .price-features li:last-child {
+            border-bottom: none;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 40px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--dark);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            transition: left 0.3s ease;
+        }
+
+        .cta-button:hover::before {
+            left: 0;
+        }
+
+        .cta-button span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.4);
+        }
+
+        /* Artists Section */
+        .artists {
+            padding: 80px 0;
+        }
+
+        .artists-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .artist-card {
+            background: var(--dark-card);
+            padding: 30px 20px;
+            border-radius: 15px;
+            text-align: center;
+            border: 2px solid rgba(255, 215, 0, 0.2);
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.6s ease backwards;
+        }
+
+        .artist-card:nth-child(1) { animation-delay: 0.1s; }
+        .artist-card:nth-child(2) { animation-delay: 0.2s; }
+        .artist-card:nth-child(3) { animation-delay: 0.3s; }
+        .artist-card:nth-child(4) { animation-delay: 0.4s; }
+
+        .artist-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.2);
+        }
+
+        .artist-initial {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.5rem;
+            color: var(--dark);
+        }
+
+        .artist-card h4 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .artist-card p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        /* Location Section */
+        .location {
+            padding: 80px 0;
+            background: linear-gradient(180deg, transparent, rgba(0, 217, 255, 0.05), transparent);
+        }
+
+        .location-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .location-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            padding: 20px 50px;
+            background: var(--dark-card);
+            border: 3px solid var(--accent);
+            border-radius: 50px;
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 1.3rem;
+            font-weight: 700;
+            transition: all 0.4s ease;
+            margin-top: 30px;
+        }
+
+        .location-button:hover {
+            background: var(--accent);
+            color: var(--dark);
+            transform: scale(1.05);
+            box-shadow: 0 10px 40px rgba(0, 217, 255, 0.4);
+        }
+
+        .location-icon {
+            font-size: 2rem;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .whatsapp-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            padding: 25px 60px;
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            border-radius: 50px;
+            color: white;
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: 700;
+            transition: all 0.4s ease;
+            margin-top: 30px;
+        }
+
+        .whatsapp-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 50px rgba(37, 211, 102, 0.5);
+        }
+
+        .whatsapp-icon {
+            font-size: 2.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-card);
+            padding: 40px 0;
+            text-align: center;
+            border-top: 2px solid rgba(255, 215, 0, 0.2);
+            margin-top: 80px;
+        }
+
+        footer p {
+            color: var(--text-light);
+            margin-bottom: 20px;
+        }
+
+        .footer-social {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 2rem;
+            }
+
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            .services-grid,
+            .pricing-grid,
+            .artists-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .whatsapp-button,
+            .location-button {
+                padding: 20px 40px;
+                font-size: 1.2rem;
+            }
+        }
+
+        /* Scroll Animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Animation -->
+    <div class="bg-animation">
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">GRUPO SV</div>
+                <div class="social-links">
+                    <a href="https://wa.me/5215512345678" target="_blank" class="social-btn" title="WhatsApp">
+                        <span>📱</span>
+                    </a>
+                    <a href="https://facebook.com/gruposv" target="_blank" class="social-btn" title="Facebook">
+                        <span>📘</span>
+                    </a>
+                    <a href="https://instagram.com/gruposv" target="_blank" class="social-btn" title="Instagram">
+                        <span>📷</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>MÚSICA Y ENTRETENIMIENTO<br>DE PRIMERA CLASE</h1>
+            <p>Grupo Norteño • DJ's • Audio Profesional • Shows & Batucadas</p>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services">
+        <div class="container">
+            <h2 class="section-title">NUESTROS SERVICIOS</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <span class="service-icon">🎵</span>
+                    <h3>GRUPO NORTEÑO</h3>
+                    <p>La mejor música norteña en vivo para tu evento. Repertorio amplio y profesionalismo garantizado.</p>
+                </div>
+                <div class="service-card">
+                    <span class="service-icon">🎧</span>
+                    <h3>DJ PROFESIONAL</h3>
+                    <p>DJ's experimentados con equipo de última generación y música para todos los gustos.</p>
+                </div>
+                <div class="service-card">
+                    <span class="service-icon">🔊</span>
+                    <h3>RENTA DE AUDIO</h3>
+                    <p>Equipo de sonido profesional para eventos de cualquier tamaño. Instalación y operación incluida.</p>
+                </div>
+                <div class="service-card">
+                    <span class="service-icon">🤖</span>
+                    <h3>ROBOTS LED</h3>
+                    <p>Espectacular show de robots LED que hacen de tu evento algo inolvidable.</p>
+                </div>
+                <div class="service-card">
+                    <span class="service-icon">🥁</span>
+                    <h3>BATUCADA</h3>
+                    <p>Energía pura con nuestra batucada profesional. Perfecta para desfiles y eventos masivos.</p>
+                </div>
+                <div class="service-card">
+                    <span class="service-icon">🎉</span>
+                    <h3>PAQUETES COMPLETOS</h3>
+                    <p>Combinamos nuestros servicios para crear el evento perfecto según tus necesidades.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing">
+        <div class="container">
+            <h2 class="section-title">PRECIOS Y PAQUETES</h2>
+            <div class="pricing-grid">
+                <div class="price-card">
+                    <h3>BÁSICO</h3>
+                    <div class="price">$$$</div>
+                    <ul class="price-features">
+                        <li>DJ por 4 horas</li>
+                        <li>Audio básico</li>
+                        <li>Iluminación LED</li>
+                        <li>Música variada</li>
+                    </ul>
+                    <a href="https://wa.me/5215512345678?text=Hola!%20Me%20interesa%20el%20paquete%20BÁSICO" class="cta-button">
+                        <span>COTIZAR</span>
+                    </a>
+                </div>
+
+                <div class="price-card">
+                    <h3>PREMIUM</h3>
+                    <div class="price">$$$$</div>
+                    <ul class="price-features">
+                        <li>Grupo Norteño 4 hrs</li>
+                        <li>Audio profesional</li>
+                        <li>Iluminación premium</li>
+                        <li>Show de robots LED</li>
+                    </ul>
+                    <a href="https://wa.me/5215512345678?text=Hola!%20Me%20interesa%20el%20paquete%20PREMIUM" class="cta-button">
+                        <span>COTIZAR</span>
+                    </a>
+                </div>
+
+                <div class="price-card">
+                    <h3>MASTER</h3>
+                    <div class="price">$$$$$</div>
+                    <ul class="price-features">
+                        <li>Grupo + DJ (6 hrs)</li>
+                        <li>Audio de concierto</li>
+                        <li>Show completo LED</li>
+                        <li>Batucada incluida</li>
+                    </ul>
+                    <a href="https://wa.me/5215512345678?text=Hola!%20Me%20interesa%20el%20paquete%20MASTER" class="cta-button">
+                        <span>COTIZAR</span>
+                    </a>
+                </div>
+
+                <div class="price-card">
+                    <h3>PERSONALIZADO</h3>
+                    <div class="price">A MEDIDA</div>
+                    <ul class="price-features">
+                        <li>Servicios a tu elección</li>
+                        <li>Duración flexible</li>
+                        <li>Equipamiento adaptado</li>
+                        <li>Presupuesto ajustado</li>
+                    </ul>
+                    <a href="https://wa.me/5215512345678?text=Hola!%20Quiero%20un%20paquete%20PERSONALIZADO" class="cta-button">
+                        <span>COTIZAR</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Artists Section -->
+    <section class="artists">
+        <div class="container">
+            <h2 class="section-title">HEMOS COMPARTIDO ESCENARIO CON</h2>
+            <div class="artists-grid">
+                <div class="artist-card">
+                    <div class="artist-initial">LA</div>
+                    <h4>Los Ángeles Azules</h4>
+                    <p>Festival de cumbia 2024</p>
+                </div>
+                <div class="artist-card">
+                    <div class="artist-initial">GF</div>
+                    <h4>Grupo Firme</h4>
+                    <p>Palenque Regional 2023</p>
+                </div>
+                <div class="artist-card">
+                    <div class="artist-initial">CB</div>
+                    <h4>Calibre 50</h4>
+                    <p>Feria Estatal 2023</p>
+                </div>
+                <div class="artist-card">
+                    <div class="artist-initial">PE</div>
+                    <h4>Pesado</h4>
+                    <p>Concierto Norteño 2024</p>
+                </div>
+            </div>
+            <p style="text-align: center; margin-top: 40px; font-size: 1.2rem; color: var(--text-light);">
+                Y muchos artistas más en eventos privados y públicos
+            </p>
+        </div>
+    </section>
+
+    <!-- Location Section -->
+    <section class="location">
+        <div class="container">
+            <div class="location-content">
+                <h2 class="section-title">ENCUÉNTRANOS</h2>
+                <p style="font-size: 1.3rem; margin-bottom: 30px;">Cuautitlán Izcalli, Estado de México</p>
+                <a href="https://maps.google.com/?q=Cuautitlán+Izcalli,+Estado+de+México" target="_blank" class="location-button">
+                    <span class="location-icon">📍</span>
+                    <span>VER UBICACIÓN EN MAPS</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact">
+        <div class="container">
+            <h2 class="section-title">CONTÁCTANOS</h2>
+            <p style="font-size: 1.3rem; margin-bottom: 20px;">¿Listo para hacer de tu evento algo inolvidable?</p>
+            <a href="https://wa.me/5215512345678?text=Hola%20Grupo%20SV!%20Quiero%20cotizar%20sus%20servicios" target="_blank" class="whatsapp-button">
+                <span class="whatsapp-icon">💬</span>
+                <span>COTIZA POR WHATSAPP</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p style="font-size: 1.2rem; font-weight: 600; margin-bottom: 20px;">GRUPO SV - Música y Entretenimiento</p>
+            <p>Cuautitlán Izcalli, Estado de México</p>
+            <div class="footer-social">
+                <a href="https://wa.me/5215512345678" target="_blank" class="social-btn" title="WhatsApp">
+                    <span>📱</span>
+                </a>
+                <a href="https://facebook.com/gruposv" target="_blank" class="social-btn" title="Facebook">
+                    <span>📘</span>
+                </a>
+                <a href="https://instagram.com/gruposv" target="_blank" class="social-btn" title="Instagram">
+                    <span>📷</span>
+                </a>
+            </div>
+            <p style="margin-top: 30px; font-size: 0.9rem; opacity: 0.7;">© 2026 Grupo SV. Todos los derechos reservados.</p>
+        </p>
+    </footer>
+
+    <script>
+        // Generate floating particles
+        function createParticles() {
+            const bgAnimation = document.querySelector('.bg-animation');
+            for (let i = 0; i < 20; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.animationDuration = (15 + Math.random() * 10) + 's';
+                bgAnimation.appendChild(particle);
+            }
+        }
+
+        // Scroll animation observer
+        function initScrollAnimations() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -100px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.fade-in').forEach(el => {
+                observer.observe(el);
+            });
+        }
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Parallax effect on scroll
+        let lastScrollY = window.scrollY;
+        window.addEventListener('scroll', () => {
+            const currentScrollY = window.scrollY;
+            const waves = document.querySelectorAll('.wave');
+            
+            waves.forEach((wave, index) => {
+                const speed = 0.5 + (index * 0.2);
+                wave.style.transform = `translateX(${-50 + (currentScrollY * speed * 0.05)}%)`;
+            });
+            
+            lastScrollY = currentScrollY;
+        });
+
+        // Initialize on load
+        window.addEventListener('load', () => {
+            createParticles();
+            initScrollAnimations();
+        });
+
+        // Add hover effect to service cards
+        document.querySelectorAll('.service-card, .price-card, .artist-card').forEach(card => {
+            card.addEventListener('mouseenter', function(e) {
+                this.style.transition = 'all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)';
+            });
+        });
+
+        // Update WhatsApp links with proper phone number
+        // IMPORTANTE: Reemplaza '5215512345678' con el número real de WhatsApp del negocio
+        const whatsappLinks = document.querySelectorAll('a[href*="wa.me"]');
+        whatsappLinks.forEach(link => {
+            // Puedes actualizar el número aquí si es necesario
+            // link.href = link.href.replace('5215512345678', 'TU_NUMERO_REAL');
+        });
+    </script>
+</body>
+</html>
