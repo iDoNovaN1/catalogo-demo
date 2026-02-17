@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>La Cocina Tradicional — Restaurante Mexicano</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  
+  <style>
+    /* ═══════════════════════════════════════════════════════
+       VARIABLES Y BASE
+       ═══════════════════════════════════════════════════════ */
+    :root {
+      --color-tierra:    #8B4513;
+      --color-terracota: #D2691E;
+      --color-crema:     #FFF8E7;
+      --color-arena:     #F5E6D3;
+      --color-verde:     #2D5016;
+      --color-rojo:      #A0522D;
+      --color-texto:     #3E2723;
+      --color-claro:     #FFFAF0;
+      
+      --fuente-titulos: 'Cormorant Garamond', serif;
+      --fuente-texto:   'Montserrat', sans-serif;
+      
+      --sombra-suave: 0 2px 8px rgba(62, 39, 35, 0.08);
+      --sombra-media: 0 4px 16px rgba(62, 39, 35, 0.12);
+      --sombra-fuerte: 0 8px 32px rgba(62, 39, 35, 0.16);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--fuente-texto);
+      color: var(--color-texto);
+      background: var(--color-crema);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Textura de papel artesanal */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: 
+        repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 2px,
+          rgba(139, 69, 19, 0.02) 2px,
+          rgba(139, 69, 19, 0.02) 4px
+        );
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.3;
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       NAVEGACIÓN
+       ═══════════════════════════════════════════════════════ */
+    nav {
+      position: sticky;
+      top: 0;
+      background: rgba(255, 248, 231, 0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 2px solid var(--color-terracota);
+      padding: 1rem 0;
+      z-index: 1000;
+      box-shadow: var(--sombra-suave);
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-family: var(--fuente-titulos);
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--color-tierra);
+      text-decoration: none;
+      letter-spacing: 0.5px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--color-texto);
+      padding: 0.5rem 0;
+      border-bottom: 2px solid transparent;
+      transition: all 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--color-terracota);
+      border-bottom-color: var(--color-terracota);
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       HERO / PORTADA
+       ═══════════════════════════════════════════════════════ */
+    .hero {
+      position: relative;
+      height: 70vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background: linear-gradient(135deg, var(--color-arena) 0%, var(--color-crema) 100%);
+      border-bottom: 3px solid var(--color-terracota);
+      overflow: hidden;
+    }
+
+    /* Decoración geométrica de fondo */
+    .hero::before {
+      content: '';
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(
+        circle,
+        rgba(139, 69, 19, 0.05) 0%,
+        transparent 70%
+      );
+      top: -200px;
+      right: -200px;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(
+        circle,
+        rgba(210, 105, 30, 0.05) 0%,
+        transparent 70%
+      );
+      bottom: -100px;
+      left: -100px;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 800px;
+      padding: 2rem;
+    }
+
+    .hero-title {
+      font-family: var(--fuente-titulos);
+      font-size: clamp(3rem, 8vw, 5rem);
+      font-weight: 700;
+      color: var(--color-tierra);
+      margin-bottom: 1rem;
+      line-height: 1.1;
+    }
+
+    .hero-subtitle {
+      font-size: 1.2rem;
+      font-weight: 300;
+      color: var(--color-texto);
+      margin-bottom: 2rem;
+      font-style: italic;
+    }
+
+    .hero-cta {
+      display: inline-block;
+      padding: 1rem 2.5rem;
+      background: var(--color-terracota);
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      border-radius: 2px;
+      box-shadow: var(--sombra-media);
+      transition: all 0.3s ease;
+    }
+
+    .hero-cta:hover {
+      background: var(--color-tierra);
+      transform: translateY(-2px);
+      box-shadow: var(--sombra-fuerte);
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       CONTENEDOR GENERAL
+       ═══════════════════════════════════════════════════════ */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       SECCIÓN DE CATEGORÍAS
+       ═══════════════════════════════════════════════════════ */
+    .section-title {
+      font-family: var(--fuente-titulos);
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--color-tierra);
+      text-align: center;
+      margin-bottom: 0.5rem;
+      position: relative;
+      display: inline-block;
+      width: 100%;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      color: var(--color-texto);
+      opacity: 0.7;
+      font-size: 1rem;
+      margin-bottom: 3rem;
+      font-style: italic;
+    }
+
+    /* Línea decorativa debajo del título */
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 80px;
+      height: 3px;
+      background: var(--color-terracota);
+      margin: 0.8rem auto 0;
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       NAVEGACIÓN DE CATEGORÍAS (PESTAÑAS)
+       ═══════════════════════════════════════════════════════ */
+    .category-nav {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 3rem;
+      padding: 0 1rem;
+    }
+
+    .category-btn {
+      padding: 0.75rem 2rem;
+      background: white;
+      border: 2px solid var(--color-terracota);
+      color: var(--color-tierra);
+      font-family: var(--fuente-texto);
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+      box-shadow: var(--sombra-suave);
+    }
+
+    .category-btn:hover {
+      background: var(--color-arena);
+      transform: translateY(-2px);
+      box-shadow: var(--sombra-media);
+    }
+
+    .category-btn.active {
+      background: var(--color-terracota);
+      color: white;
+      border-color: var(--color-terracota);
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       GRID DE PLATILLOS
+       ═══════════════════════════════════════════════════════ */
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 2rem;
+      opacity: 0;
+      animation: fadeIn 0.5s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    .menu-item {
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: var(--sombra-suave);
+      transition: all 0.3s ease;
+      border: 1px solid rgba(139, 69, 19, 0.1);
+    }
+
+    .menu-item:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--sombra-fuerte);
+    }
+
+    .item-image {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      background: var(--color-arena);
+      border-bottom: 2px solid var(--color-terracota);
+    }
+
+    .item-content {
+      padding: 1.5rem;
+    }
+
+    .item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 0.75rem;
+    }
+
+    .item-name {
+      font-family: var(--fuente-titulos);
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--color-tierra);
+      line-height: 1.2;
+    }
+
+    .item-price {
+      font-family: var(--fuente-titulos);
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--color-terracota);
+      white-space: nowrap;
+      margin-left: 1rem;
+    }
+
+    .item-description {
+      font-size: 0.9rem;
+      color: var(--color-texto);
+      opacity: 0.8;
+      line-height: 1.5;
+      margin-bottom: 1rem;
+    }
+
+    .item-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .tag {
+      font-size: 0.75rem;
+      padding: 0.25rem 0.75rem;
+      background: var(--color-arena);
+      border: 1px solid var(--color-terracota);
+      color: var(--color-tierra);
+      border-radius: 20px;
+      font-weight: 500;
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       SECCIÓN DE CONTACTO
+       ═══════════════════════════════════════════════════════ */
+    .contact-section {
+      background: white;
+      padding: 4rem 2rem;
+      border-top: 3px solid var(--color-terracota);
+      border-bottom: 3px solid var(--color-terracota);
+    }
+
+    .contact-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 3rem;
+    }
+
+    .contact-item {
+      text-align: center;
+    }
+
+    .contact-icon {
+      font-size: 2.5rem;
+      color: var(--color-terracota);
+      margin-bottom: 1rem;
+    }
+
+    .contact-title {
+      font-family: var(--fuente-titulos);
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--color-tierra);
+      margin-bottom: 0.5rem;
+    }
+
+    .contact-info {
+      color: var(--color-texto);
+      font-size: 1rem;
+    }
+
+    .contact-link {
+      color: var(--color-terracota);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .contact-link:hover {
+      color: var(--color-tierra);
+      text-decoration: underline;
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       FOOTER
+       ═══════════════════════════════════════════════════════ */
+    footer {
+      background: var(--color-tierra);
+      color: var(--color-crema);
+      padding: 2rem;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    footer a {
+      color: var(--color-terracota);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       RESPONSIVE
+       ═══════════════════════════════════════════════════════ */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+
+      .hero-title {
+        font-size: 2.5rem;
+      }
+
+      .menu-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .category-nav {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .category-btn {
+        width: 100%;
+      }
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       UTILIDADES
+       ═══════════════════════════════════════════════════════ */
+    .hidden {
+      display: none;
+    }
+
+    .text-center {
+      text-align: center;
+    }
+
+    .mt-2 {
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════════════════
+       NAVEGACIÓN
+       ═══════════════════════════════════════════════════════ -->
+  <nav>
+    <div class="nav-container">
+      <a href="#" class="logo">La Cocina Tradicional</a>
+      <ul class="nav-links">
+        <li><a href="#menu">Menú</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+        <li><a href="#ubicacion">Ubicación</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════════════════════════════════════
+       HERO
+       ═══════════════════════════════════════════════════════ -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1 class="hero-title">Sabor Auténtico Mexicano</h1>
+      <p class="hero-subtitle">Recetas tradicionales preparadas con amor y los mejores ingredientes</p>
+      <a href="#menu" class="hero-cta">Ver Menú</a>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       MENÚ
+       ═══════════════════════════════════════════════════════ -->
+  <section id="menu" class="container">
+    <h2 class="section-title">Nuestro Menú</h2>
+    <p class="section-subtitle">Descubre los platillos que hacen de cada visita una experiencia memorable</p>
+
+    <!-- Navegación de Categorías -->
+    <div class="category-nav">
+      <button class="category-btn active" data-category="todos">Todos</button>
+      <button class="category-btn" data-category="entradas">Entradas</button>
+      <button class="category-btn" data-category="sopas">Sopas</button>
+      <button class="category-btn" data-category="platos-fuertes">Platos Fuertes</button>
+      <button class="category-btn" data-category="antojitos">Antojitos</button>
+      <button class="category-btn" data-category="postres">Postres</button>
+      <button class="category-btn" data-category="bebidas">Bebidas</button>
+    </div>
+
+    <!-- Grid de Platillos -->
+    <div class="menu-grid" id="menuGrid">
+      
+      <!-- ENTRADAS -->
+      <div class="menu-item" data-category="entradas">
+        <img src="https://images.unsplash.com/photo-1619221882004-ee7e22a2a0c2?w=600&q=80" alt="Guacamole" class="item-image">
+        <div class="item-content">
+          <div class="item-header">
+            <h3 class="item-name">Guacamole Fresco</h3>
+            <span class="item-price">$85</span>
+          </div>
+          <p class="item-description">Aguacate, tomate, cebolla, cilantro y limón. Servido con totopos recién hechos.</p>
+          <div class="item-tags">
+            <span class="tag">Vegetariano</span>
+            <span class="tag">Picante</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-item" data-category="entradas">
+        <img src="https://images.unsplash.com/photo-1613514785940-daed07799d52?w=600&q=80" alt="Queso Fundido" class="item-image">
+        <div class="item-content">
+          <div class="item-header">
+            <h3 class="item-name">Queso Fundido</h3>
+            <span class="item-price">$110</span>
+          </div>
+          <p class="item-description">Queso Oaxaca derretido con chorizo, champiñones o rajas. Incluye tortillas.</p>
+          <div class="item-tags">
+            <span class="tag">Popular</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-item" data-category="entradas">
+        <img src="https://images.unsplash.com/photo-1599974672808-2b8a86f3b1fd?w=600&q=80" alt="Ceviche" class="item-image">
+        <div class="item-content">
+          <div class="item-header">
+            <h3 class="item-name">Ceviche de Pescado</h3>
+            <span class="item-price">$145</span>
+          </div>
+          <p class="item-description">Pescado fresco marinado en limón con tomate, cebolla, cilantro y aguacate.</p>
+          <div class="item-tags">
+            <span class="tag">Fresco</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- SOPAS -->
+      <div class="menu-item" data-category="sopas">
+        <img src="https://images.unsplash.com/photo-1547592166-23ac45744acd?w=600&q=80" alt="Sopa de Tortilla" class="item-image">
+        <div class="item-content">
+          <div class="item-header">
+            <h3 class="item-name">Sopa de Tortilla</h3>
+            <span class="item-price">$95</span>
+          </div>
+          <p class="item-description">Caldo de jitomate con tiras de tortilla frita, aguacate, queso y crema.</p>
+          <div class="item-tags">
+            <span class="tag">Tradicional</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-item" data-category="sopas">
+        <img src="https://images.unsplash.com/photo-1604908815604-f1d4b9c8f7e6?w=600&q=80" alt="Pozole" class="item-image">
+        <div class="item-content">
+          <div class="item-header">
+            <h3 class="item-name">Pozole Rojo</h3>
+            <span class="item-price">$130</span>
+          </div>
+          <p class="item-description">Caldo tradicional de maíz cacahuazintle con carne de cerdo. Incluye guarniciones.</p>
+          <div class="item-tags">
+            <span class="tag">Especial</span>
+            <span class="tag">Popular</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-item" data-category="sopas">
+        <img src="https://images.unsplash.com/photo-1626200421770-614ed1a6054f?w=600&q=80" alt="Caldo" class="item-image">
+        <div class="item-content">
+          <div class="item-header">
+            <h3 class="item-name">Caldo de Res</h3>
+            <span class="item-price">$120</span>
+          </div>
+          <p class="item-description">Caldo casero con verduras frescas y carne de res. Servido con arroz y limón.</p>
+          <div class="item-tags">
+            <span class="tag">Casero</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- PLATOS FUERTES -->
+      <div class="menu-item" data-category="platos-fuertes">
+        <img src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=600&q=80" alt="Mole" class="item-image">
+        <div class="item-content">
+          <div class="item-header">
+            <h3 class="item-name">Mole Poblano</h3>
+            <span class="item-price">$165</span>
+          </div>
+          <p class="item-description">Piezas de pollo bañadas en mole tradicional. Incluye arroz y tortillas.</p>
+          <div class="item-tags">
+            <span class="tag">Tradicional</span>
+            <span class="tag">Especial</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-item" data-category="platos-fuertes">
+        <img src="https://images.unsplash.com/photo-1599974672808-2b8a86f3b1fd?w=600&q=80" alt="Chiles Rellenos" class="item-image">
+        <div class="item-content">
+          <div class="item-header">
+            <h3 class="item-name">Chiles en Nogada</h3>
+            <span class="item-price">$185</span>
+          </div>
+          <p class="item-description">Chile poblano relleno de picadillo, bañado en salsa de nuez y granada.</p>
+          <div class="item-tags">
+            <span class="tag">Temporada</span>
+            <span class="tag">Premium</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-item" data-category="platos-fuertes">
+        <img src="https://images.unsplash.com/photo-1615870216519-2f9fa575fa5c?w=600&q=80" alt="Enchiladas" class="item-image">
+        <div class="item-content">
+          <div class="item-header">
+            <h3 class="item-name">Enchiladas Verdes</h3>
+            <span class="item-price">$125</span>
+          </div>
+          <p class="item-description">Tortillas rellenas de pollo bañadas en salsa verde. Con crema, queso y cebolla.</p>
+          <div class="item-tags">
+            <span class="tag">Popular</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-item" data-category="platos-fuertes">
+        <img src="https://images.unsplash.com/photo-1599974672808-2b8a86f3b1fd?w=600&q=80" alt="Arrachera" class="item-image">
+        <div class="item-content">
+          <div class="item-header">
+            <h3 class="item-name">Arrachera a la Parrilla</h3>
+            <span class="item-price">$195</span>
+          </div>
+          <p class="item-description">Carne de res a la parrilla con cebollitas, nopales y guacamole. Tortillas a mano.</p>
+          <div class="item-tags">
+            <span class="tag">Premium</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ANTOJITOS -->
+      <div class="menu-item" data-category="antojitos">
+        <img src="https://images.unsplash.com/photo-1599974672808-2b8a86f3b1fd?w=600&q=80" alt="Tacos" class="item-image">
+        <div class="item-content">
+          <div class="item-header">
+            <h3 class="item-name">Tacos al Pastor</h3>
+            <span class="item-price">$65</span>
+          </div>
+          <p class="item-description">3 tacos de carne adobada al trompo con piña, cebolla y cilantro.</p>
+          <div class="item-tags">
+            <span class="tag">Popular</span>
+            <span class="tag">3 pzas</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-item" data-category="antojitos">
+        <img src="https://images.unsplash.com/photo-1618040996337-56904b7850b9?w=600&q=80" alt="Quesadillas" class="item-image">
+        <div class="item-content">
+          <div class="item-header">
+            <h3 class="item-name">Quesadillas</h3>
+            <span class="item-price">$75</span>
+          </div>
+          <p class="item-description">Tortilla con queso Oaxaca y tu elección de guisado. Incluye salsa y crema.</p>
+          <div class="item-tags">
+            <span class="tag">Hecha a mano</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-item" data-category="antojitos">
+        <img src="https://images.unsplash.com/photo-1599974672808-2b8a86f3b1fd?w=600&q=80" alt="Sopes" class="item-image">
+        <div class="item-content">
+          <div class="item-header">
+            <h3 class="item-name">Sopes Tradicionales</h3>
+            <span class="item-price">$80</span>
+          </div>
+          <p class="item-description">Masa gruesa con frijoles, lechuga, queso, crema y tu elección de carne.</p>
+          <div class="item-tags">
+            <span class="tag">3 pzas</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-item" data-category="antojitos">
+        <img src="https://images.unsplash.com/photo-1599974672808-2b8a86f3b1fd?w=600&q=80" alt="Tostadas" class="item-image">
+        <div class="item-content">
+          <div class="item-header">
+            <h3 class="item-name">Tostadas de Tinga</h3>
+            <span class="item-price">$70</span>
+          </div>
+          <p class="item-description">Tostadas crujientes con tinga de pollo, frijoles, lechuga, crema y queso.</p>
+          <div class="item-tags">
+            <span class="tag">3 pzas</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- POSTRES -->
+      <div class="menu-item" data-category="postres">
+        <img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?w=600&q=80" alt="Flan" class="item-image">
+        <div class="item-content">
+          <div class="item-header">
+            <h3 class="item-name">Flan Napolitano</h3>
+            <span class="item-price">$55</span>
+          </div>
+          <p class="item-description">Flan casero con cajeta. Suave y cremoso, preparado con receta tradicional.</p>
+          <div class="item-tags">
+            <span class="tag">Casero</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-item" data-category="postres">
+        <img src="https://images.unsplash.com/photo-1587314168485-3236d6710814?w=600&q=80" alt="Churros" class="item-image">
+        <div class="item-content">
+          <div class="item-header">
+            <h3 class="item-name">Churros con Chocolate</h3>
+            <span class="item-price">$65</span>
+          </div>
+          <p class="item-description">Churros recién hechos espolvoreados con azúcar y canela. Chocolate caliente.</p>
+          <div class="item-tags">
+            <span class="tag">Recién hecho</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-item" data-category="postres">
+        <img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=600&q=80" alt="Tres Leches" class="item-image">
+        <div class="item-content">
+          <div class="item-header">
+            <h3 class="item-name">Pastel Tres Leches</h3>
+            <span class="item-price">$70</span>
+          </div>
+          <p class="item-description">Bizcocho empapado en tres leches con betún de merengue. Porción generosa.</p>
+          <div class="item-tags">
+            <span class="tag">Favorito</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- BEBIDAS -->
+      <div class="menu-item" data-category="bebidas">
+        <img src="https://images.unsplash.com/photo-1623065422902-30a2d299bbe4?w=600&q=80" alt="Agua fresca" class="item-image">
+        <div class="item-content">
+          <div class="item-header">
+            <h3 class="item-name">Agua Fresca</h3>
+            <span class="item-price">$35</span>
+          </div>
+          <p class="item-description">Jamaica, horchata, limón o tamarindo. Jarra de 1 litro.</p>
+          <div class="item-tags">
+            <span class="tag">Natural</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-item" data-category="bebidas">
+        <img src="https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=600&q=80" alt="Michelada" class="item-image">
+        <div class="item-content">
+          <div class="item-header">
+            <h3 class="item-name">Michelada Preparada</h3>
+            <span class="item-price">$65</span>
+          </div>
+          <p class="item-description">Cerveza preparada con limón, sal, chamoy y salsas. Escarchado de chile.</p>
+          <div class="item-tags">
+            <span class="tag">Refrescante</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-item" data-category="bebidas">
+        <img src="https://images.unsplash.com/photo-1610889556528-9a770e32642f?w=600&q=80" alt="Margarita" class="item-image">
+        <div class="item-content">
+          <div class="item-header">
+            <h3 class="item-name">Margarita Clásica</h3>
+            <span class="item-price">$95</span>
+          </div>
+          <p class="item-description">Tequila, triple sec y limón natural. Escarchado de sal. También de sabores.</p>
+          <div class="item-tags">
+            <span class="tag">Cocktail</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-item" data-category="bebidas">
+        <img src="https://images.unsplash.com/photo-1571934811356-5cc061b6821f?w=600&q=80" alt="Café" class="item-image">
+        <div class="item-content">
+          <div class="item-header">
+            <h3 class="item-name">Café de Olla</h3>
+            <span class="item-price">$40</span>
+          </div>
+          <p class="item-description">Café tradicional preparado con canela y piloncillo. Servido en jarro de barro.</p>
+          <div class="item-tags">
+            <span class="tag">Tradicional</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       CONTACTO
+       ═══════════════════════════════════════════════════════ -->
+  <section id="contacto" class="contact-section">
+    <div class="contact-grid">
+      <div class="contact-item">
+        <div class="contact-icon">📍</div>
+        <h3 class="contact-title">Ubicación</h3>
+        <p class="contact-info">
+          Av. Principal #123<br>
+          Colonia Centro<br>
+          Ciudad de México
+        </p>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">📞</div>
+        <h3 class="contact-title">Teléfono</h3>
+        <p class="contact-info">
+          <a href="tel:+525512345678" class="contact-link">(55) 1234-5678</a><br>
+          <a href="https://wa.me/5215512345678" class="contact-link" target="_blank">WhatsApp</a>
+        </p>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">🕐</div>
+        <h3 class="contact-title">Horario</h3>
+        <p class="contact-info">
+          Lunes - Domingo<br>
+          10:00 AM - 10:00 PM
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       FOOTER
+       ═══════════════════════════════════════════════════════ -->
+  <footer>
+    <p>&copy; 2024 La Cocina Tradicional. Todos los derechos reservados.</p>
+    <p style="margin-top: 0.5rem;">Hecho con ❤️ en México</p>
+  </footer>
+
+  <!-- ═══════════════════════════════════════════════════════
+       JAVASCRIPT MÍNIMO (Solo filtrado de categorías)
+       ═══════════════════════════════════════════════════════ -->
+  <script>
+    // Funcionalidad de filtrado de categorías
+    const categoryButtons = document.querySelectorAll('.category-btn');
+    const menuItems = document.querySelectorAll('.menu-item');
+
+    categoryButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        // Remover clase 'active' de todos los botones
+        categoryButtons.forEach(btn => btn.classList.remove('active'));
+        
+        // Agregar clase 'active' al botón clickeado
+        button.classList.add('active');
+        
+        // Obtener categoría seleccionada
+        const selectedCategory = button.getAttribute('data-category');
+        
+        // Filtrar items
+        menuItems.forEach(item => {
+          const itemCategory = item.getAttribute('data-category');
+          
+          if (selectedCategory === 'todos' || itemCategory === selectedCategory) {
+            item.style.display = 'block';
+          } else {
+            item.style.display = 'none';
+          }
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>
