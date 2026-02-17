@@ -406,9 +406,9 @@
     }
 
     .contact-icon {
-      font-size: 2.5rem;
-      color: var(--color-terracota);
-      margin-bottom: 1rem;
+      width: 48px;
+      height: 48px;
+      margin: 0 auto 1rem;
     }
 
     .contact-title {
@@ -434,6 +434,110 @@
     .contact-link:hover {
       color: var(--color-tierra);
       text-decoration: underline;
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       SECCIÓN DE EVENTOS
+       ═══════════════════════════════════════════════════════ */
+    .eventos-section {
+      background: linear-gradient(135deg, var(--color-crema) 0%, var(--color-arena) 100%);
+      padding: 4rem 2rem;
+      border-top: 3px solid var(--color-terracota);
+    }
+
+    .eventos-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      max-width: 1000px;
+      margin: 0 auto;
+      align-items: center;
+    }
+
+    .eventos-subtitle {
+      font-family: var(--fuente-titulos);
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--color-tierra);
+      margin-bottom: 1.5rem;
+    }
+
+    .eventos-list {
+      list-style: none;
+      margin-bottom: 2rem;
+    }
+
+    .eventos-list li {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.75rem 0;
+      font-size: 1.05rem;
+      color: var(--color-texto);
+      border-bottom: 1px solid rgba(139, 69, 19, 0.1);
+    }
+
+    .eventos-list li:last-child {
+      border-bottom: none;
+    }
+
+    .eventos-description {
+      font-size: 0.95rem;
+      color: var(--color-texto);
+      opacity: 0.7;
+      font-style: italic;
+      line-height: 1.6;
+    }
+
+    .whatsapp-box {
+      background: white;
+      padding: 2.5rem;
+      border-radius: 12px;
+      box-shadow: var(--sombra-fuerte);
+      text-align: center;
+      border: 2px solid var(--color-terracota);
+    }
+
+    .whatsapp-title {
+      font-family: var(--fuente-titulos);
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--color-tierra);
+      margin-bottom: 1rem;
+    }
+
+    .whatsapp-text {
+      font-size: 1rem;
+      color: var(--color-texto);
+      margin-bottom: 2rem;
+      opacity: 0.8;
+    }
+
+    .whatsapp-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1rem 2rem;
+      background: #25D366;
+      color: white;
+      border: none;
+      border-radius: 50px;
+      font-family: var(--fuente-texto);
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .whatsapp-btn:hover {
+      background: #20BA5A;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+    }
+
+    .whatsapp-btn:active {
+      transform: translateY(0);
     }
 
     /* ═══════════════════════════════════════════════════════
@@ -480,6 +584,15 @@
 
       .category-btn {
         width: 100%;
+      }
+
+      .eventos-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .whatsapp-box {
+        padding: 2rem 1.5rem;
       }
     }
 
@@ -856,12 +969,78 @@
   </section>
 
   <!-- ═══════════════════════════════════════════════════════
+       EVENTOS / SERVICIOS
+       ═══════════════════════════════════════════════════════ -->
+  <section class="eventos-section">
+    <div class="container">
+      <h2 class="section-title">Servicio de Banquetes</h2>
+      <p class="section-subtitle">¿Organizas un evento? Llevamos nuestro sabor auténtico a tu celebración</p>
+      
+      <div class="eventos-content">
+        <div class="eventos-text">
+          <h3 class="eventos-subtitle">Ofrecemos servicio para:</h3>
+          <ul class="eventos-list">
+            <li>
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7 10L9 12L13 8M19 10C19 14.9706 14.9706 19 10 19C5.02944 19 1 14.9706 1 10C1 5.02944 5.02944 1 10 1C14.9706 1 19 5.02944 19 10Z" stroke="#D2691E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              Bodas y aniversarios
+            </li>
+            <li>
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7 10L9 12L13 8M19 10C19 14.9706 14.9706 19 10 19C5.02944 19 1 14.9706 1 10C1 5.02944 5.02944 1 10 1C14.9706 1 19 5.02944 19 10Z" stroke="#D2691E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              Eventos corporativos
+            </li>
+            <li>
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7 10L9 12L13 8M19 10C19 14.9706 14.9706 19 10 19C5.02944 19 1 14.9706 1 10C1 5.02944 5.02944 1 10 1C14.9706 1 19 5.02944 19 10Z" stroke="#D2691E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              Cumpleaños y XV años
+            </li>
+            <li>
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7 10L9 12L13 8M19 10C19 14.9706 14.9706 19 10 19C5.02944 19 1 14.9706 1 10C1 5.02944 5.02944 1 10 1C14.9706 1 19 5.02944 19 10Z" stroke="#D2691E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              Bautizos y primeras comuniones
+            </li>
+            <li>
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7 10L9 12L13 8M19 10C19 14.9706 14.9706 19 10 19C5.02944 19 1 14.9706 1 10C1 5.02944 5.02944 1 10 1C14.9706 1 19 5.02944 19 10Z" stroke="#D2691E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              Reuniones familiares
+            </li>
+          </ul>
+          <p class="eventos-description">
+            Menús personalizados • Servicio completo • Atención profesional • Desde 20 personas
+          </p>
+        </div>
+        
+        <div class="whatsapp-box">
+          <h3 class="whatsapp-title">¿Listo para cotizar tu evento?</h3>
+          <p class="whatsapp-text">Contáctanos por WhatsApp y te atendemos de inmediato</p>
+          <button class="whatsapp-btn" id="btnWhatsApp">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M17.472 14.382C17.015 14.153 14.963 13.145 14.56 13.005C14.157 12.865 13.863 12.795 13.568 13.253C13.273 13.711 12.476 14.663 12.213 14.958C11.951 15.253 11.688 15.289 11.231 15.06C10.774 14.831 9.26 14.341 7.463 12.742C6.057 11.495 5.119 9.951 4.857 9.493C4.594 9.035 4.827 8.792 5.056 8.564C5.262 8.358 5.513 8.031 5.742 7.769C5.971 7.507 6.041 7.316 6.181 7.021C6.321 6.726 6.251 6.464 6.136 6.235C6.021 6.006 5.119 3.954 4.752 3.038C4.385 2.122 4.018 2.248 3.759 2.234C3.5 2.22 3.206 2.22 2.911 2.22C2.616 2.22 2.123 2.335 1.72 2.793C1.317 3.251 0.211 4.259 0.211 6.311C0.211 8.363 1.756 10.343 1.985 10.638C2.214 10.933 5.119 15.519 9.438 17.298C10.381 17.703 11.118 17.949 11.695 18.133C12.638 18.437 13.491 18.401 14.166 18.286C14.916 18.157 16.554 17.334 16.921 16.422C17.288 15.51 17.288 14.742 17.173 14.567C17.058 14.392 16.929 14.277 16.472 14.048V14.382Z" fill="white"/>
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M20.5 3.5C18.25 1.25 15.22 0 12 0C5.41 0 0 5.41 0 12C0 14.11 0.63 16.16 1.78 17.92L0 24L6.27 22.24C7.96 23.27 9.94 23.83 12 23.83C18.59 23.83 24 18.42 24 11.83C24 8.61 22.75 5.58 20.5 3.33V3.5ZM12 21.78C10.17 21.78 8.38 21.27 6.84 20.32L6.48 20.11L2.82 21.06L3.79 17.5L3.56 17.12C2.51 15.52 1.94 13.67 1.94 11.78C1.94 6.48 6.48 2.17 12 2.17C14.66 2.17 17.17 3.2 19.06 5.09C20.95 6.98 21.98 9.49 21.98 12.15C21.98 17.45 17.44 21.76 11.92 21.76L12 21.78Z" fill="white"/>
+            </svg>
+            Cotizar Evento por WhatsApp
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
        CONTACTO
        ═══════════════════════════════════════════════════════ -->
   <section id="contacto" class="contact-section">
     <div class="contact-grid">
       <div class="contact-item">
-        <div class="contact-icon">📍</div>
+        <svg class="contact-icon" width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M21 10C21 17 12 23 12 23C12 23 3 17 3 10C3 7.61305 3.94821 5.32387 5.63604 3.63604C7.32387 1.94821 9.61305 1 12 1C14.3869 1 16.6761 1.94821 18.364 3.63604C20.0518 5.32387 21 7.61305 21 10Z" stroke="#D2691E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M12 13C13.6569 13 15 11.6569 15 10C15 8.34315 13.6569 7 12 7C10.3431 7 9 8.34315 9 10C9 11.6569 10.3431 13 12 13Z" stroke="#D2691E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
         <h3 class="contact-title">Ubicación</h3>
         <p class="contact-info">
           Av. Principal #123<br>
@@ -870,7 +1049,9 @@
         </p>
       </div>
       <div class="contact-item">
-        <div class="contact-icon">📞</div>
+        <svg class="contact-icon" width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M22 16.92V19.92C22.0011 20.1985 21.9441 20.4742 21.8325 20.7293C21.7209 20.9845 21.5573 21.2136 21.3521 21.4019C21.1468 21.5901 20.9046 21.7335 20.6407 21.8227C20.3769 21.9119 20.0974 21.9451 19.82 21.92C16.7428 21.5856 13.787 20.5341 11.19 18.85C8.77382 17.3147 6.72533 15.2662 5.18999 12.85C3.49997 10.2412 2.44824 7.27097 2.11999 4.18C2.095 3.90347 2.12787 3.62476 2.21649 3.36162C2.30512 3.09849 2.44756 2.85669 2.63476 2.65162C2.82196 2.44655 3.0498 2.28271 3.30379 2.17052C3.55777 2.05833 3.83233 2.00026 4.10999 2H7.10999C7.5953 1.99522 8.06579 2.16708 8.43376 2.48353C8.80173 2.79999 9.04207 3.23945 9.10999 3.72C9.23662 4.68007 9.47144 5.62273 9.80999 6.53C9.94454 6.88792 9.97366 7.27691 9.8939 7.65088C9.81415 8.02485 9.62886 8.36811 9.35999 8.64L8.08999 9.91C9.51355 12.4135 11.5864 14.4864 14.09 15.91L15.36 14.64C15.6319 14.3711 15.9751 14.1858 16.3491 14.1061C16.7231 14.0263 17.1121 14.0555 17.47 14.19C18.3773 14.5286 19.3199 14.7634 20.28 14.89C20.7658 14.9585 21.2094 15.2032 21.5265 15.5775C21.8437 15.9518 22.0122 16.4296 22 16.92Z" stroke="#D2691E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
         <h3 class="contact-title">Teléfono</h3>
         <p class="contact-info">
           <a href="tel:+525512345678" class="contact-link">(55) 1234-5678</a><br>
@@ -878,7 +1059,10 @@
         </p>
       </div>
       <div class="contact-item">
-        <div class="contact-icon">🕐</div>
+        <svg class="contact-icon" width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="#D2691E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M12 6V12L16 14" stroke="#D2691E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
         <h3 class="contact-title">Horario</h3>
         <p class="contact-info">
           Lunes - Domingo<br>
@@ -926,6 +1110,28 @@
           }
         });
       });
+    });
+
+    // ═══════════════════════════════════════════════════════
+    // BOTÓN WHATSAPP PARA EVENTOS
+    // ═══════════════════════════════════════════════════════
+    document.getElementById('btnWhatsApp').addEventListener('click', function() {
+      // ============================================
+      // CAMBIA ESTE NÚMERO POR EL TUYO
+      // Formato: 52 + 1 + tus 10 dígitos
+      // Ejemplo: 5215512345678
+      // ============================================
+      const whatsappNumber = '5215512345678';
+      
+      const mensaje = 
+        '¡Hola! Me interesa contratar su servicio de banquetes para un evento.\n\n' +
+        'Me gustaría recibir información sobre:\n' +
+        '- Menús disponibles\n' +
+        '- Precios\n' +
+        '- Disponibilidad de fechas';
+      
+      const url = 'https://wa.me/' + whatsappNumber + '?text=' + encodeURIComponent(mensaje);
+      window.open(url, '_blank');
     });
   </script>
 
